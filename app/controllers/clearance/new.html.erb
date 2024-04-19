@@ -1,0 +1,7 @@
+<%= form_with(model: @user, url: password_path, local: true) do |form| %>
+    <%= form.label :email, 'Email' %>
+    <%= form.email_field :email, class: 'form-control', placeholder: 'Seu endereço de email' %>
+  
+    <%= form.submit 'Enviar email de redefinição de senha', class: 'btn btn-primary' %>
+  <% end %>
+  

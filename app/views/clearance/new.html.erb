@@ -1,0 +1,15 @@
+<!-- app/views/clearance/passwords/new.html.erb -->
+
+<h1>Esqueceu sua senha?</h1>
+
+  <% = form_with(model: post, local: true) do | form | %>
+  
+  <div>
+    <%= form.label :email, 'Seu email' %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.submit 'Enviar instruções de redefinição de senha' %>
+  </div>
+<% end %>

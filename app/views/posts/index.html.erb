@@ -1,0 +1,10 @@
+<% @posts.each do |post| %>
+    <div>
+      <h3><%= post.title %></h3>
+      <p><%= post.content %></p>
+      <p>Posted by: <%= post.user.name %></p>
+      <hr>
+    </div>
+  <% end %>
+  <%= will_paginate @posts %>
+  

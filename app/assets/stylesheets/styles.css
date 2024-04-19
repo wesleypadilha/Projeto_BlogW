@@ -1,0 +1,84 @@
+/* app/assets/stylesheets/styles.css */
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para o formulário de login e cadastro */
+.login-signup {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.login-form,
+.signup-form {
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.subtitle {
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Estilos para os botões */
+.button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button.is-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.button.is-primary:hover {
+    background-color: #0056b3;
+}
+
+.button.is-text {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.button.is-text:hover {
+    text-decoration: none;
+}
