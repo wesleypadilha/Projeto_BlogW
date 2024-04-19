@@ -1,0 +1,9 @@
+---
+en:
+  login:
+    check_inbox:
+      check_junk_folder: >
+        Didn’t receive the email? Check your email’s junk folder.
+
+      go_to_email: >
+        Go to %{provider}

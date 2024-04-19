@@ -1,9 +1,26 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root 'home#index'
-  get 'signup', to: 'users#new'
-  post 'signup', to: 'users#create'
-  get 'signup_confirmation', to: 'users#show'
-  get '/passwords/new', to: 'clearance/passwords#new', as: 'new_password'
-  post '/passwords', to: 'clearance/passwords#create', as: 'passwords'
-  get '/passwords', to: redirect('/passwords/new') # Adicionando uma rota para redirecionar para a página de redefinição de senha
+  root "home#index"
+
+  get "home" => "home#index"
+
+  route :login do
+    create as: "login", bare: true
+    get :check_inbox
+    get :verify_email
+  end
+
+  post "logout" => "login#destroy"
+  get "u/:username" => "profile#show",
+      as: :profile
+
+  route :posts do
+    create
+    update
+    show
+  end
+
+  post "posts/:post_id/like" => "likes#create", as: :like_post, format: false
+  delete "posts/:post_id/like" => "likes#delete", format: false
 end
