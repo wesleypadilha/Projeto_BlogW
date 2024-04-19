@@ -1,8 +1,6 @@
-# app/controllers/home_controller.rb
+# frozen_string_literal: true
 
 class HomeController < ApplicationController
-    def index
-      @message = "Bem-vindo ao nosso blog!"
-    end
+  def index
   end
-  
+end

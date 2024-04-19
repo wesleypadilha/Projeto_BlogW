@@ -1,0 +1,32 @@
+.button {
+  @apply no-underline
+         cursor-pointer
+         font-bold
+         px-7
+         py-3
+         rounded-lg
+         text-sm
+         uppercase
+         inline-block;
+}
+
+.button.primary {
+  @apply bg-accent text-white;
+}
+
+.button.secondary {
+  @apply bg-white
+         text-accent
+         border-2
+         border-accent;
+}
+
+button[disabled],
+input[type="submit"][disabled],
+input[type="button"][disabled] {
+  @apply bg-slate-400 cursor-default;
+}
+
+.button + .button {
+  @apply ml-3;
+}

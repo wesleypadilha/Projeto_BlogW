@@ -1,0 +1,22 @@
+<%= form_for @post_form, as: :post, url: edit_post_path(@post_form) do |f| %>
+  <div class="relative" data-controller="chars-counter" data-chars-counter-limit="999">
+    <%= f.input :description,
+                as: :text,
+                input_html: {
+                  data: {"chars-counter-target" => "input"}
+                } %>
+    <span data-chars-counter-target="count" class="absolute right-0 bottom-0 mr-2 mb-4"></span>
+  </div>
+  <%= f.input :show_location, as: :boolean, wrapper: :control_group %>
+  <%= f.input :visibility, as: :select, collection: [
+                [t("simple_form.labels.post.visibility_private"), "private"],
+                [t("simple_form.labels.post.visibility_public"), "public"],
+                [t("simple_form.labels.post.visibility_unlisted"), "unlisted"]
+               ], include_blank: false %>
+  <%= f.input :keywords %>
+
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

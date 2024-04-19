@@ -1,17 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <%= page_meta %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-</head>
-<body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
-</body>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%#= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <%= svg_image_tag(:icons) %>
+    <%= render "main_header" %>
+
+    <div class="main-content">
+      <div class="mb-5 logo">
+        <%= link_to home_path do %>
+          <%= svg_image_tag "logo" %>
+        <% end %>
+      </div>
+
+      <%= render "flash_messages" %>
+
+      <% if page_meta.title.simple.present? %>
+        <div class="page-header">
+          <h1 class="page-title"><%= page_meta.title.simple %></h1>
+          <% if page_meta.description.present? %>
+            <p class="page-description"><%= page_meta.description %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
 </html>

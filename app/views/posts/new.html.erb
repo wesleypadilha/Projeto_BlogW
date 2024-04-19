@@ -1,0 +1,23 @@
+<%= form_for @post,
+             url: new_post_path,
+             as: :post,
+             data: {controller: "file-upload"} do |f|
+%>
+  <%= f.hidden_field :description %>
+
+  <%= f.label :raw_photo, class: "p-10 border-slate-200 rounded-lg border-2 border-dashed block dropZone", data: {"file-upload-target" => "dropZone"} do %>
+    Loading
+  <% end %>
+  <img data-file-upload-target="preview" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg==" alt="">
+  <%= f.input :raw_photo,
+              wrapper_html: {class: "hidden"},
+              input_html: {
+                direct_upload: true,
+                "data-file-upload-target" => "field",
+                accept: Photomatic::Config.photo_mime_types.join(","),
+              } %>
+
+  <p>
+    <%= f.submit data: {"file-upload-target" => "button"} %>
+  </p>
+<% end %>

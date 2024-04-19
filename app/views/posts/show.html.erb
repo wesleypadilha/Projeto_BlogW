@@ -1,19 +1,84 @@
-<h1><%= @post.title %></h1>
-<p><%= @post.content %></p>
-<p>Posted by: <%= @post.user.name %></p>
+<style type="text/css">
+  body {
+    background: <%= @view_object.meta["colors"]["light"]["bg"] %>;
+  }
 
-<h3>Comments</h3>
-<% @post.comments.each do |comment| %>
-  <p><%= comment.content %></p>
-<% end %>
+  /*#photo:before {
+    content: "Loading";
+    color: <%= @view_object.meta["colors"]["light"]["fg"] %>;
+  }*/
+</style>
 
-<h4>Add a comment:</h4>
-<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-  <div>
-    <%= form.label :content, "Your Comment" %>
-    <%= form.text_area :content %>
+<div class="photo-wrapper">
+  <%= image_tag url_for(@view_object.large_photo),
+      id: "photo",
+      width: @view_object.photo_width,
+      height: @view_object.photo_height %>
+</div>
+
+<div class="photo-sidebar">
+  <div class="user-info flex flex-row items-center mb-3">
+    <%= gravatar @view_object.user.email %>
+
+    <div class="flex flex-col ml-2">
+      <span class="text-sm font-bold"><%= @view_object.user.display_name %></span>
+      <%= link_to @view_object.user.username,
+                  profile_path(@view_object.user),
+                  class: "text-accent text-sm" %>
+    </div>
   </div>
-  <div>
-    <%= form.submit "Post Comment" %>
-  </div>
-<% end %>
+
+  <% if @view_object.has?(:description) %>
+    <div class="text-sm">
+      <%= simple_format @view_object.description %>
+    </div>
+  <% end %>
+
+  <ul class="photo-meta">
+    <% if @view_object.has?(:camera) %>
+      <li>
+        <%= icon :camera %>
+        <%= @view_object.camera %>
+      </li>
+    <% end %>
+
+    <% if @view_object.has?(:lens) %>
+      <li>
+        <%= icon :lens %>
+        <%= @view_object.lens %>
+      </li>
+    <% end %>
+
+    <% if @view_object.has?(:technical_info) %>
+      <li>
+        <%= icon :info %>
+        <%= @view_object.technical_info %>
+      </li>
+    <% end %>
+
+    <% if @view_object.has?(:country) %>
+      <li>
+        <%= icon :pin %>
+        <%= post_location(@view_object) %>
+      </li>
+    <% end %>
+
+    <% if @view_object.has?(:photo_taken_at) %>
+      <li>
+        <%= icon :calendar %>
+        <%= localize(@view_object.photo_taken_at.to_date, format: :long) %>
+      </li>
+    <% end %>
+
+    <li>
+      <%= icon :calendar, class: "icon opacity-0" %>
+      <time class="text-xs" datetime="<%= @view_object.created_at.iso8601 %>">
+        <%= t(".uploaded", time: time_ago_in_words(@view_object.created_at)) %>
+      </time>
+    </li>
+
+    <li>
+      <%= like_button(@view_object) %>
+    </li>
+  </ul>
+</div>
